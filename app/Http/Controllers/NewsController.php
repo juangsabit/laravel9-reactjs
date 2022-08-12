@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\NewsCollection;
-use App\Models\news;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -43,13 +43,19 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $news = new News();
+        $news->title = $request->title;
+        $news->description = $request->description;
+        $news->category = $request->category;
+        $news->author = auth()->user()->email;
+        $news->save();
+        return redirect()->back()->with('message', 'news has been created');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\news  $news
+     * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
     public function show(news $news)
