@@ -3,7 +3,7 @@ const isNews = (news) => {
         return (
         <div key={i} className="card w-96 bg-base-100 shadow-xl">
             <figure>
-                <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+                <img src="https://placeimg.com/400/255/tech/grayscale" alt="Shoes" />
             </figure>
             <div className="card-body">
                 <h2 className="card-title">

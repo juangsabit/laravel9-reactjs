@@ -15,7 +15,7 @@ class NewsCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection,
+            'data' => $this->collection->sortKeys(),
         ];
     }
 }

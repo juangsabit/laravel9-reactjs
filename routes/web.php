@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\NewsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -19,8 +20,11 @@ use Inertia\Inertia;
 Route::get('/', [NewsController::class, 'index']);
 Route::post('/news', [NewsController::class, 'store']);
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [Dashboard::class, 'index']
+)->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard/addnews', function () {
+    return Inertia::render('AddNews');
+})->middleware(['auth', 'verified'])->name('addnews');
 
 require __DIR__.'/auth.php';
