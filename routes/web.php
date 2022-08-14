@@ -31,5 +31,6 @@ Route::get('/dashboard/editnews', [NewsController::class, 'edit']
 )->middleware(['auth', 'verified'])->name('dashboard.editnews');
 
 Route::post('/news/update', [NewsController::class, 'update']);
+Route::post('/news/delete', [NewsController::class, 'destroy']);
 
 require __DIR__.'/auth.php';

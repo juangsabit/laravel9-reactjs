@@ -25,6 +25,7 @@
     "dependencies": {
         "daisyui": "^2.22.0",
         "material-icons-react": "^1.0.4",
+        "moment": "^2.29.4",
         "sweetalert2": "^11.4.26"
     }
 }

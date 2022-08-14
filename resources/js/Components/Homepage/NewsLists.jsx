@@ -1,8 +1,10 @@
+import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-react";
-import Swal from 'sweetalert2'
+import moment from "moment";
+import Swal from 'sweetalert2';
 
 const btnDelete = (id) => {
-    console.log(id)
+    // console.log(id)
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -13,6 +15,7 @@ const btnDelete = (id) => {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
+          Inertia.post('news/delete', {id:id})
           Swal.fire(
             'Deleted!',
             'Your file has been deleted.',
@@ -24,7 +27,9 @@ const btnDelete = (id) => {
 
 const isNews = (news, typenews) => {
     return news.map((data, i) => {
-        // console.log(data)
+        // console.log(moment().format('DD-MM-YY'))
+        const now = moment().format('DD-MM-YYYY')
+        const createdAt = moment(data.created_at.substring(0, 19)).format('DD-MM-YYYY')
         return (
         <div key={i} className="card w-96 bg-base-100 shadow-xl">
             {/* <figure>
@@ -33,7 +38,7 @@ const isNews = (news, typenews) => {
             <div className="card-body">
                 <h2 className="card-title">
                     {data.title}
-                    <div className="badge badge-secondary">NEW</div>
+                    {createdAt == now && <div className="badge badge-secondary">NEW</div>}
                 </h2>
                 <p>{data.description}</p>
                 <div className="card-actions justify-end">

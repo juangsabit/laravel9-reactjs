@@ -103,8 +103,9 @@ class NewsController extends Controller
      * @param  \App\Models\news  $news
      * @return \Illuminate\Http\Response
      */
-    public function destroy(news $news)
-    {
-        //
+    public function destroy(Request $request)
+   {
+        News::where('id', $request->id)->delete();
+        return back();
     }
 }
