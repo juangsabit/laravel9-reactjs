@@ -18,13 +18,18 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [NewsController::class, 'index']);
-Route::post('/news', [NewsController::class, 'store']);
+Route::post('/news/create', [NewsController::class, 'store']);
 
 Route::get('/dashboard', [Dashboard::class, 'index']
 )->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard/addnews', function () {
-    return Inertia::render('AddNews');
-})->middleware(['auth', 'verified'])->name('addnews');
+    return Inertia::render('News/AddNews');
+})->middleware(['auth', 'verified'])->name('dashboard.addnews');
+
+Route::get('/dashboard/editnews', [NewsController::class, 'edit']
+)->middleware(['auth', 'verified'])->name('dashboard.editnews');
+
+Route::post('/news/update', [NewsController::class, 'update']);
 
 require __DIR__.'/auth.php';

@@ -15,10 +15,28 @@ class Dashboard extends Controller
      */
     public function index()
     {
-        $news = new NewsCollection(News::paginate(6));
-        // dd($news);
+        $myNews = new NewsCollection(News::where('author', auth()->user()->email)->OrderByDesc('id')->paginate(3));
+        $totalMyNews = new NewsCollection(News::where('author', auth()->user()->email));
+        // $myNews->push('myNews');
+        // dd($myNews);
         return Inertia::render('Dashboard', [
-            'news' => $news
+            'myNews' => $myNews,
+            'totalMyNews' => count($totalMyNews),
+        ]);
+    }
+    
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\News  $news
+     * @return \Illuminate\Http\Response
+     */
+    public function show(news $news)
+    {
+        $myNews = $news::where('author', auth()->user()->email)->get();
+        // dd($myNews);
+        return Inertia::render('Dashboard', [
+            'myNews' => $myNews,
         ]);
     }
 }

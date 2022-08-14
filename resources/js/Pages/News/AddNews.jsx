@@ -12,7 +12,7 @@ export default function AddNews(props) {
 
     const handleSubmit = () => {
         const data = {title, description, category}
-        Inertia.post('/news', data)
+        Inertia.post('/news/create', data)
         setTitle('')
         setDescription('')
         setCategory('')
@@ -29,7 +29,7 @@ export default function AddNews(props) {
 
             <div className='py-6'>
                 <div className='max-w-7xl mx-auto sm:px-6 lg:px-8'>
-                    <Link href="/dashboard" class="btn gap-2">
+                    <Link href="/dashboard" className="btn gap-2">
                     <span>&#8592;</span>Back
                     </Link>
                 </div>
@@ -48,7 +48,7 @@ export default function AddNews(props) {
                     <input type="text" placeholder="Title" onChange={(title) => setTitle(title.target.value)} className=" m-3 input input-bordered w-full" value={title} />
                     <input type="text" placeholder="Description" onChange={(description) => setDescription(description.target.value)} className=" m-3 input input-bordered w-full" value={description}/>
                     <input type="text" placeholder="Category" onChange={(category) => setCategory(category.target.value)} className=" m-3 input input-bordered w-full" value={category}/>
-                    <button className="btn btn-accent m-2" onClick={() => handleSubmit()}>Submit</button>
+                    <button className="btn btn-accent m-2" onClick={() => handleSubmit()}>Save</button>
                 </div>
             </div>
         </Authenticated>

@@ -16,7 +16,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = new NewsCollection(News::paginate(9));
+        $news = new NewsCollection(News::OrderByDesc('id')->paginate(9));
         // dd($news);
         return Inertia::render('Homepage', [
             'title' => 'Homepage',
@@ -60,7 +60,11 @@ class NewsController extends Controller
      */
     public function show(news $news)
     {
-        //
+        $myNews = $news::where('author', auth()->user()->email)->get();
+        // dd($myNews);
+        return Inertia::render('Dashboard', [
+            'myNews' => $myNews,
+        ]);
     }
 
     /**
@@ -69,9 +73,11 @@ class NewsController extends Controller
      * @param  \App\Models\news  $news
      * @return \Illuminate\Http\Response
      */
-    public function edit(news $news)
+    public function edit(news $news, Request $request)
     {
-        //
+        return Inertia::render('News/EditNews', [
+            'newsById' => $news->find($request->id)
+        ]);
     }
 
     /**
@@ -83,7 +89,12 @@ class NewsController extends Controller
      */
     public function update(Request $request, news $news)
     {
-        //
+        News::where('id', $request->id)->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'category' => $request->category,
+        ]);
+        return redirect()->back()->with('message', 'news has been updated');
     }
 
     /**

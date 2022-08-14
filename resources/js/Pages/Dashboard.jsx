@@ -6,7 +6,6 @@ import NewsLists from '@/Components/Homepage/NewsLists';
 import Paginator from '@/Components/Homepage/Paginator';
 
 export default function Dashboard(props) {
-    console.log(props)
     return (
         <Authenticated
             auth={props.auth}
@@ -22,9 +21,9 @@ export default function Dashboard(props) {
                             <div className="stat-figure text-secondary">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </div>
-                            <div className="stat-title">Downloads</div>
-                            <div className="stat-value">31K</div>
-                            <div className="stat-desc">Jan 1st - Feb 1st</div>
+                            <div className="stat-title">My News</div>
+                            <div className="stat-value">{props.totalMyNews}</div>
+                            <div className="stat-desc">Post</div>
                         </div>
                         
                         <div className="stat">
@@ -51,11 +50,13 @@ export default function Dashboard(props) {
             <div className="flex justify-center flex-col lg:flex-row lg:flex-wrap lg:items-stretch items-center gap-5">
                 <Link className="btn btn-secondary mb-5" href='/dashboard/addnews'>Add News</Link>
             </div>
+
             <div className='flex justify-center flex-col lg:flex-row lg:flex-wrap lg:items-stretch items-center gap-5'>
-                <NewsLists news={props.news.data}/>
+                <NewsLists news={props.myNews.data} typenews="myNews"/>
             </div>
+
             <div className="flex justify-center items-center m-5">
-                <Paginator meta={props.news.meta} />
+                <Paginator meta={props.myNews.meta} />
             </div>
 
             <Footer />
